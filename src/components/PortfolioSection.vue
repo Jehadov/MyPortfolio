@@ -1,5 +1,6 @@
 <template>
-  <section id="Portfoliosection" class="py-5 text-white">
+  <hr class="mb-5">
+  <section class="py-5 text-white">
     <div class="text-center mb-5">
       <h1 class="titles">
         <strong>Po<strong class="text-danger">rtfo</strong>lio</strong>
@@ -40,7 +41,7 @@
                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                  <img :src="project.image" class="img-fluid rounded mb-3" alt="Project Detail" />
+                  <img :src="project.image" class="img-fluid custom-img rounded mb-3 " alt="Project Detail" />
                   <p>{{ project.modalContent }}</p>
                 </div>
                 <div class="modal-footer border-0">

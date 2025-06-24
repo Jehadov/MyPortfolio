@@ -5,35 +5,24 @@
         <a class="navbar-brand text-light fs-2" href="#">
           <strong class="text-danger">Jehadov</strong>
         </a>
-        <button
-          class="navbar-toggler text-light bg-danger"
-          type="button"
-          @click="toggleSidebar"
-        >
+        <button class="navbar-toggler text-light bg-danger" type="button" @click="toggleSidebar">
           <span class="navbar-toggler-icon text-light"></span>
         </button>
-        <div
-          :class="['custom-sidebar', { 'show': sidebarVisible }]"
-          id="navbarNav"
-        >
+        <div :class="['custom-sidebar', { 'show': sidebarVisible }]" id="navbarNav">
           <ul class="navbar-nav text-center">
             <li class="nav-item" v-for="link in links" :key="link.name">
               <a
                 class="nav-link custom-underline ms-2 red"
                 :href="link.href"
                 @click="closeSidebar"
+                :class="{ active: currentSection === link.name }"
               >
                 {{ link.name }}
               </a>
             </li>
           </ul>
         </div>
-        <!-- Backdrop -->
-        <div
-          class="backdrop"
-          v-if="sidebarVisible"
-          @click="closeSidebar"
-        ></div>
+        <div class="backdrop" v-if="sidebarVisible" @click="closeSidebar"></div>
       </div>
     </nav>
   </header>
@@ -41,6 +30,7 @@
 
 <script>
 export default {
+  props: ['currentSection'],
   data() {
     return {
       sidebarVisible: false,
@@ -65,7 +55,6 @@ export default {
 </script>
 
 <style scoped>
-/* Sidebar Styles */
 .custom-sidebar {
   position: fixed;
   top: 0;
@@ -91,7 +80,6 @@ export default {
   }
 }
 
-/* Backdrop */
 .backdrop {
   position: fixed;
   top: 0;
@@ -102,7 +90,6 @@ export default {
   z-index: 1040;
 }
 
-/* Perfect Underline Animation */
 .custom-underline {
   position: relative;
   display: inline-block;
@@ -126,13 +113,17 @@ export default {
   transform: scaleX(1);
 }
 
-
-.red{
+.red {
   color: white;
   font-family: sans-serif;
   font-weight: bolder;
 }
-.red:hover{
+.red:hover {
   color: #dc3545;
+}
+
+.nav-link.active {
+  color: #dc3545 !important;
+  border-bottom: 2px solid #dc3545;
 }
 </style>

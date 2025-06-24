@@ -1,5 +1,5 @@
 <template>
-  <section id="Homesection" class="py-3 text-light">
+  <section class="py-3 text-light">
     <div class="hero-section">
       <div class="container position-relative">
 

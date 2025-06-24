@@ -1,5 +1,5 @@
 <template>
-  <section id="Aboutsection" class="about-section">
+  <section class="about-section">
     <div class="container">
       <h1 class="text-center text-light mb-5">
         <strong class="text-danger">About</strong> Me
@@ -70,6 +70,9 @@ export default {
 .about-section {
   padding: 80px 0;
   background-color: #111111b9;
+}
+html {
+  scroll-behavior: smooth;
 }
 
 .about-img {

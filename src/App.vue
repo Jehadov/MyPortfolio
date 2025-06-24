@@ -1,36 +1,35 @@
 <template>
   <div id="app" class="page-background d-flex flex-column min-vh-100">
-    <HeaderComponent />
+    <HeaderComponent :current-section="currentSection" />
 
-    <!-- Main content goes here -->
+    <!-- Main content -->
     <main class="flex-grow-1">
-      <div>
+      <div id="Homesection" ref="Homesection">
         <HomeSection />
       </div>
-      <div class="scroll-slide-in" v-scroll-reveal>
+      <div id="Aboutsection" class="scroll-slide-in" v-scroll-reveal ref="Aboutsection">
         <AboutSection />
       </div>
-      <div>
+      <div id="Portfoliosection" ref="Portfoliosection">
         <PortfolioSection />
       </div>
-      <div>
+      <div id="SkillsSection" ref="SkillsSection">
         <SkillsComponent />
       </div>
     </main>
-
-    <FooterComponent />
+    <div id="Conract" ref="Conract">
+      <FooterComponent />
+    </div>
   </div>
 </template>
 
 <script>
-import HeaderComponent from './components/HeaderComponent.vue'
-import FooterComponent from './components/FooterComponent.vue'
-import HomeSection from './components/HomeSection.vue'
-import AboutSection from './components/AboutSection.vue'
-import PortfolioSection from './components/PortfolioSection.vue'
-import SkillsComponent from './components/SkillsComponent.vue'
-
-
+import HeaderComponent from './components/HeaderComponent.vue';
+import FooterComponent from './components/FooterComponent.vue';
+import HomeSection from './components/HomeSection.vue';
+import AboutSection from './components/AboutSection.vue';
+import PortfolioSection from './components/PortfolioSection.vue';
+import SkillsComponent from './components/SkillsComponent.vue';
 
 export default {
   name: 'App',
@@ -40,7 +39,58 @@ export default {
     HomeSection,
     AboutSection,
     PortfolioSection,
-    SkillsComponent
+    SkillsComponent,
+  },
+  data() {
+    return {
+      currentSection: '',
+    };
+  },
+  mounted() {
+    window.addEventListener('scroll', this.detectSection);
+    this.detectSection(); // call initially
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.detectSection);
+  },
+  methods: {
+    detectSection() {
+      const sectionIds = ['Homesection', 'Aboutsection', 'Portfoliosection', 'SkillsSection', 'Conract'];
+      let maxVisibleArea = 0;
+      let mostVisibleSection = '';
+
+      sectionIds.forEach((id) => {
+        const el = this.$refs[id];
+        if (!el) return;
+
+        const rect = el.getBoundingClientRect();
+        const visibleHeight = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+
+        if (visibleHeight > maxVisibleArea && visibleHeight > 50) {
+          maxVisibleArea = visibleHeight;
+          mostVisibleSection = id;
+        }
+      });
+
+      this.currentSection = this.mapSectionIdToName(mostVisibleSection);
+    },
+
+    mapSectionIdToName(id) {
+      switch (id) {
+        case 'Homesection':
+          return 'Home';
+        case 'Aboutsection':
+          return 'About';
+        case 'Portfoliosection':
+          return 'Portfolio';
+        case 'SkillsSection':
+          return 'Skills';
+        case 'Conract':
+          return 'Contact';
+        default:
+          return '';
+      }
+    },
   },
   directives: {
     scrollReveal: {
@@ -56,15 +106,15 @@ export default {
           { threshold: 0.1 }
         );
         observer.observe(el);
-      }
-    }
-  }
-}
+      },
+    },
+  },
+};
 </script>
 
-
 <style>
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -83,7 +133,6 @@ html, body {
   background-attachment: fixed;
 }
 
-/* Optional: make it even more responsive on small screens */
 @media (max-width: 768px) {
   .page-background {
     background-size: contain;
@@ -92,10 +141,9 @@ html, body {
   }
 }
 
-/* Base styles */
 * {
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .fontsizeandhover {
@@ -146,25 +194,23 @@ html, body {
   height: 160px;
 }
 
-/* Animation styles for scroll */
 .scroll-slide-in {
   opacity: 0;
-  transform: translateX(-100px); /* Start from the left */
+  transform: translateX(-100px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .scroll-slide-in.visible {
   opacity: 1;
-  transform: translateX(0); /* Slide to its final position */
+  transform: translateX(0);
 }
 
 .scroll-slide-in-out {
   opacity: 0;
-  transform: translateX(100px); /* Slide out to the right */
+  transform: translateX(100px);
   transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
 }
 
-/* Optional: Add an animation effect when content is fully loaded */
 .underline {
   position: relative;
   display: inline-block;

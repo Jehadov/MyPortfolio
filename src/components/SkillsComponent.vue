@@ -1,5 +1,5 @@
 <template>
-  <section class="container my-5 py-5 mb-5" id="SkillsSection">
+  <section class="container my-5 py-5 mb-5">
     <h1 class="text-center mb-4 text-light mt-5">
       My <strong class="text-danger">Skills</strong>
     </h1>

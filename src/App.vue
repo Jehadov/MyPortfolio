@@ -118,6 +118,10 @@ body {
   margin: 0;
   height: 100%;
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px; /* or whatever your header height is */
+}
 
 #app {
   display: flex;

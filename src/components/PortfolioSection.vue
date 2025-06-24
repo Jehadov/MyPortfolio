@@ -1,11 +1,13 @@
 <template>
-  <hr class="mb-5">
+  <hr class="mb-5" />
   <section class="py-5 text-white">
     <div class="text-center mb-5">
       <h1 class="titles">
         <strong>Po<strong class="text-danger">rtfo</strong>lio</strong>
       </h1>
+      <p class="lead">A showcase of my latest projects and works</p>
     </div>
+
     <div class="container">
       <div class="row gy-4 justify-content-center">
         <div
@@ -45,9 +47,41 @@
                     alt="Project Detail"
                   />
                   <p class="mt-3">{{ project.modalContent }}</p>
+
+                  <div v-if="project.tech && project.tech.length" class="mb-3">
+                    <strong>Technologies:</strong>
+                    <span
+                      v-for="(tag, tagIndex) in project.tech"
+                      :key="tagIndex"
+                      class="badge bg-secondary me-1"
+                    >
+                      {{ tag }}
+                    </span>
+                  </div>
+
+                  <div class="d-flex gap-2 flex-wrap">
+                    <a
+                      v-if="project.github"
+                      :href="project.github"
+                      target="_blank"
+                      class="btn btn-sm btn-outline-light"
+                    >
+                      GitHub
+                    </a>
+                    <a
+                      v-if="project.demo"
+                      :href="project.demo"
+                      target="_blank"
+                      class="btn btn-sm btn-outline-danger"
+                    >
+                      Live Demo
+                    </a>
+                  </div>
                 </div>
                 <div class="modal-footer border-0">
-                  <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                    Close
+                  </button>
                 </div>
               </div>
             </div>
@@ -60,7 +94,7 @@
 </template>
 
 <script>
-import { onMounted, ref, nextTick } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
@@ -76,7 +110,6 @@ export default {
         const querySnapshot = await getDocs(collection(db, 'projects'));
         projects.value = querySnapshot.docs.map(doc => doc.data());
         visibleCards.value = new Array(projects.value.length).fill(false);
-
         await nextTick();
         observeCards();
       } catch (error) {

@@ -1,5 +1,4 @@
 <template>
-  <hr class="mb-5" />
   <section class="py-5 text-white">
     <div class="text-center mb-5">
       <h1 class="titles">

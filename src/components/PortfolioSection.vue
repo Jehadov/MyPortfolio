@@ -14,9 +14,7 @@
           ref="projectRefs"
           :class="['col-12 col-sm-10 col-md-6 col-lg-4', { 'visible': visibleCards[index] }]"
         >
-          <div
-            class="card bg-dark border-0 shadow project-card h-100 scale-anim"
-          >
+          <div class="card bg-dark border-0 shadow project-card h-100 scale-anim">
             <img :src="project.image" alt="Project" class="card-img-top custom-img" />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title text-danger">{{ project.title }}</h5>
@@ -34,15 +32,19 @@
 
           <!-- Modal -->
           <div class="modal fade" :id="'modal' + index" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
               <div class="modal-content bg-dark text-white border-0">
                 <div class="modal-header border-0">
                   <h5 class="modal-title">{{ project.title }}</h5>
                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                  <img :src="project.image" class="img-fluid imageS rounded mb-3 " alt="Project Detail" />
-                  <p>{{ project.modalContent }}</p>
+                  <img
+                    :src="project.image"
+                    class="img-fluid rounded modal-project-image"
+                    alt="Project Detail"
+                  />
+                  <p class="mt-3">{{ project.modalContent }}</p>
                 </div>
                 <div class="modal-footer border-0">
                   <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
@@ -75,7 +77,6 @@ export default {
         projects.value = querySnapshot.docs.map(doc => doc.data());
         visibleCards.value = new Array(projects.value.length).fill(false);
 
-        // Wait for DOM to render before observing
         await nextTick();
         observeCards();
       } catch (error) {
@@ -126,6 +127,16 @@ export default {
   border-top-right-radius: 12px;
 }
 
+.modal-project-image {
+  max-height: 300px;
+  width: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
 @media (max-width: 576px) {
   .titles {
     font-size: 1.8rem;
@@ -147,8 +158,14 @@ export default {
     font-size: 0.85rem;
   }
 
-  .imageS {
-    width: 100%;
+  .modal-project-image {
+    max-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-project-image {
+    max-height: 300px;
   }
 }
 </style>

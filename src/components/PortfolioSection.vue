@@ -41,7 +41,7 @@
                   <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                  <img :src="project.image" class="img-fluid custom-img rounded mb-3 " alt="Project Detail" />
+                  <img :src="project.image" class="img-fluid imageS rounded mb-3 " alt="Project Detail" />
                   <p>{{ project.modalContent }}</p>
                 </div>
                 <div class="modal-footer border-0">
@@ -145,6 +145,10 @@ export default {
 
   .btn {
     font-size: 0.85rem;
+  }
+
+  .imageS {
+    width: 100%;
   }
 }
 </style>

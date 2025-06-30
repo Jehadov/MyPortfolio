@@ -19,21 +19,20 @@
           <div
             ref="textBlock"
             :class="{ 'scroll-hidden': !textVisible, 'scroll-visible': textVisible }"
-            class="col-md-6 mt-5  text-center text-md-start transition-scroll"
+            class="col-md-6 mt-5 text-center text-md-start transition-scroll"
           >
             <h1 class="fw-bold">Hi, I'm <span class="text-danger">Jehad Taha</span></h1>
             <h3>
               <span class="text-danger">I'm a </span>
               <span id="typed-text" class="typed-text"></span>
             </h3>
-            <button
+            <a
+              :href="cvLink"
+              download="Jehad_Taha_CV.pdf"
               class="btn btn-danger mt-4"
-              type="button"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#Sidebar"
             >
-              Learn More
-            </button>
+              📄 Download CV
+            </a>
           </div>
 
           <!-- Image -->
@@ -52,29 +51,6 @@
         </div>
 
       </div>
-
-      <!-- Sidebar -->
-      <div
-        class="offcanvas offcanvas-start text-bg-dark"
-        id="Sidebar"
-        style="background-image: url('https://wallpapercave.com/wp/wp2757874.gif'); background-size: cover;"
-      >
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title text-danger">Information</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div class="offcanvas-body">
-          <p>
-            Welcome to my personal portfolio. This space is designed to present my projects, showcase my skills, and share a bit about who I am.
-          </p>
-          <p>
-            My journey began at Yarmouk University, where I studied Computer Engineering and developed a strong interest in programming.
-          </p>
-          <p>
-            Feel free to explore and discover more about me and the work I'm passionate about.
-          </p>
-        </div>
-      </div>
     </div>
   </section>
 </template>
@@ -89,8 +65,9 @@ export default {
     return {
       textVisible: false,
       imageVisible: false,
-      headingVisible: false, // ✅ Now it’s correctly declared
+      headingVisible: false,
       titles: [],
+      cvLink: "https://jehadov.github.io/jehad-resume/Jehad_Resume.pdf", // ✅ Direct link
     };
   },
   async mounted() {
@@ -98,7 +75,7 @@ export default {
     this.typeTitle();
     this.observeScroll(this.$refs.textBlock, "textVisible");
     this.observeScroll(this.$refs.imageBlock, "imageVisible");
-    this.observeScroll(this.$refs.mainHeading, "headingVisible"); // ✅ This now runs correctly
+    this.observeScroll(this.$refs.mainHeading, "headingVisible");
   },
   methods: {
     async loadTitles() {
@@ -142,7 +119,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .bg-dark {
@@ -199,7 +175,6 @@ export default {
   opacity: 1;
   transform: translateY(0);
 }
-
 
 @media (max-width: 576px) {
   .cute-image {

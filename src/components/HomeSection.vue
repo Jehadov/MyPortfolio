@@ -31,7 +31,7 @@
               download="Jehad_Taha_CV.pdf"
               class="btn btn-danger mt-4"
             >
-              📄 Download CV
+              📄 My Resume
             </a>
           </div>
 

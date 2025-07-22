@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  vue-portfolio:
+    build: .
+    container_name: vue-portfolio-container
+    ports:
+      - "8080:80"
+    restart: unless-stopped

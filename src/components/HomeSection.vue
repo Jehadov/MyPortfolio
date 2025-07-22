@@ -42,7 +42,7 @@
             class="col-md-6 text-center cute-image-wrapper transition-scroll mb-4 mb-md-0"
           >
             <img
-              src="https://i.postimg.cc/ncGTqBQy/Clipped-image-20250420-170145.png"
+              src="../../public/Clipped-image-20250420-170145.png"
               class="img-fluid cute-image"
               alt="Hero Image"
               style="max-height: 250px"

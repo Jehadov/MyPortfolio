@@ -1,14 +1,12 @@
-# Firebase local folder (DO NOT PUSH)
+# Firebase Config (The file with your API keys)
+src/firebase.js
+src/firebaseConfig.js
+
+# Environment Variables (The best practice)
+.env
+.env.local
+
+# Firebase CLI cache and project aliases
 .firebase/
-
-# Local Firebase project settings (contains project IDs)
 .firebaserc
-
-# Firebase logs
 firebase-debug.log
-
-# Firebase functions (if you ever add them)
-functions/node_modules/
-functions/.env
-functions/.env.local
-functions/.runtimeconfig.json
